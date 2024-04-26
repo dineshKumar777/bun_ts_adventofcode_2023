@@ -66,3 +66,5 @@ export function day2part2() {
   });
   console.log('part2 output:', output);
 }
+
+// Only difficulty I faced is understood the requirement and worked solution for the wrong requirement. next time need to re-read the requirement again.

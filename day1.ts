@@ -28,7 +28,6 @@ const getCalibrationValue = (nums: number[]): number => {
 let totalCalibrationValue = 0;
 
 export function day1part1() {
-  // part 1 output
   day1ActualInput.split('\n').forEach((line, index) => {
     const calibrationNums = getValues(line);
     const calibrationValue = getCalibrationValue(calibrationNums);
