@@ -1,4 +1,5 @@
-const part1TestInput: string = `467..114..
+const part1TestInput: string = `
+467..114..
 ...*......
 ..35..633.
 ......#...
@@ -36,7 +37,7 @@ export function day3part1() {
       );
       // console.log('linebelow', lineBelow);
       const adjacentCharacters = lineAbove + sameLine + lineBelow;
-      // console.log(`number: ${number} ${adjacentCharacters}`);
+      console.log(`number: ${number} ${adjacentCharacters}`);
       if (!adjacentCharacters.replaceAll(/[0-9\.]/g, '').length) {
         // console.log('non part number');
         continue;
@@ -50,3 +51,38 @@ export function day3part1() {
 /***
  * this is was a hard problem i was not able to solve without refrencing other solution. This is just a plain copy of github solution i found. for this problem i need to understand 2d array concept.
  */
+
+export function day3part2() {
+  let raw = day3ActualInput.replace(/\r?\n/g, ';');
+  // console.log('rawinput ->', raw);
+
+  const wlen = raw.indexOf(';') + 1;
+  const partNums = raw.match(/\d+/g)!.map((x) => +x);
+  let allstar: { [key: number]: number[] } = {};
+  for (let num of partNums) {
+    let startIndex = raw.indexOf(num.toString());
+    let endIndex = startIndex + num.toString().length;
+
+    for (let i = startIndex - 1 - wlen; i < endIndex + 1 - wlen; i++)
+      if (raw[i] === '*')
+        allstar[i] ? allstar[i].push(num) : (allstar[i] = [num]);
+    for (let i = startIndex - 1; i < endIndex + 1; i++)
+      if (raw[i] === '*')
+        allstar[i] ? allstar[i].push(num) : (allstar[i] = [num]);
+    for (let i = startIndex - 1 + wlen; i < endIndex + 1 + wlen; i++)
+      if (raw[i] === '*')
+        allstar[i] ? allstar[i].push(num) : (allstar[i] = [num]);
+
+    raw =
+      raw.substring(0, startIndex) +
+      '.'.repeat(num.toString().length) +
+      raw.substring(endIndex);
+    // console.log('raw', raw);
+  }
+  // find the keys which have exact two elements and sum up their multiplication (of exact two elements)
+  const output = Object.values(allstar)
+    .filter((x) => x.length === 2)
+    .map((x) => x[0] * x[1])
+    .reduce((a, b) => a + b);
+  console.log('part2 output', output);
+}
