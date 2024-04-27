@@ -49,8 +49,9 @@ export function day3part1() {
 }
 
 /***
- * this is was a hard problem i was not able to solve without refrencing other solution. This is just a plain copy of github solution i found. for this problem i need to understand 2d array concept.
- */
+ * this is was a problem i was not able to solve without refrencing other solution. This is just a plain copy of github solution i found. for this problem i need to understand 2d array concept.
+ * Looks like part2 solutions which i found doesnt requires 2d array concept.
+ **/
 
 export function day3part2() {
   let raw = day3ActualInput.replace(/\r?\n/g, ';');
@@ -84,5 +85,5 @@ export function day3part2() {
     .filter((x) => x.length === 2)
     .map((x) => x[0] * x[1])
     .reduce((a, b) => a + b);
-  console.log('part2 output', output);
+  console.log('part2 output:', output);
 }
