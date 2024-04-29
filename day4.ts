@@ -11,46 +11,46 @@ const input = `
 Card 184: 47 16 69 11 99 34 79 65 49  9 | 92 97 64 83 49 73 17 36 29 46  1 15 78 25 58 81 51 23 84 39 60 91 67  3 56
 `;
 
-const day4ActualInput = await Bun.file('./inputs/day4.txt').text();
+const day4ActualInput = await Bun.file("./inputs/day4.txt").text();
 
 export function day4part1() {
-  const cards = day4ActualInput
-    .replace(/\s\s/g, ' ')
-    .replace(/Card\s+\d+: /g, '')
-    .trim()
-    .split('\n');
-  let totalPoints = 0;
-  cards.forEach((card, cardIndex) => {
-    console.log(`card ${cardIndex + 1} - ${card}`);
-    let cardPoints = 0;
-    let winnumCount = 0;
-    const winningNums = card
-      .trim()
-      .split(' | ')[0]
-      .split(' ')
-      .map((x) => Number(x));
+	const cards = day4ActualInput
+		.replace(/\s\s/g, " ")
+		.replace(/Card\s+\d+: /g, "")
+		.trim()
+		.split("\n");
+	let totalPoints = 0;
+	cards.forEach((card, cardIndex) => {
+		console.log(`card ${cardIndex + 1} - ${card}`);
+		let cardPoints = 0;
+		let winnumCount = 0;
+		const winningNums = card
+			.trim()
+			.split(" | ")[0]
+			.split(" ")
+			.map((x) => Number(x));
 
-    const mynums = card
-      .trim()
-      .split(' | ')[1]
-      .split(' ')
-      .map((x) => Number(x));
+		const mynums = card
+			.trim()
+			.split(" | ")[1]
+			.split(" ")
+			.map((x) => Number(x));
 
-    mynums.forEach((num, index) => {
-      if (winningNums.includes(num)) {
-        // console.log(`${index} winning num`, num);
-        winnumCount++;
-        if (winnumCount !== 1) {
-          cardPoints *= 2;
-        } else {
-          cardPoints++;
-        }
-        console.log(`card ${cardIndex} ${num}: ${cardPoints}`);
-      }
-    });
-    totalPoints += cardPoints;
-  });
-  console.log('part1 output:', totalPoints);
+		mynums.forEach((num, index) => {
+			if (winningNums.includes(num)) {
+				// console.log(`${index} winning num`, num);
+				winnumCount++;
+				if (winnumCount !== 1) {
+					cardPoints *= 2;
+				} else {
+					cardPoints++;
+				}
+				console.log(`card ${cardIndex} ${num}: ${cardPoints}`);
+			}
+		});
+		totalPoints += cardPoints;
+	});
+	console.log("part1 output:", totalPoints);
 }
 
 /***
