@@ -54,7 +54,7 @@ export function day3part1() {
  **/
 
 export function day3part2() {
-  let raw = day3ActualInput.replace(/\r?\n/g, ';');
+  let raw = part1TestInput.replace(/\r?\n/g, ';');
   // console.log('rawinput ->', raw);
 
   const wlen = raw.indexOf(';') + 1;
@@ -81,6 +81,7 @@ export function day3part2() {
     // console.log('raw', raw);
   }
   // find the keys which have exact two elements and sum up their multiplication (of exact two elements)
+  console.log(allstar);
   const output = Object.values(allstar)
     .filter((x) => x.length === 2)
     .map((x) => x[0] * x[1])
