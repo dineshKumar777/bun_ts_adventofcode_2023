@@ -27,13 +27,14 @@ function countCardPoints(line: string) {
 	return output;
 }
 
+const lines = day4ActualInput.trim().split("\n");
+
 export function day4part1() {
-	const lines = part1TestInput.trim().split("\n");
 	let result = 0;
 	for (const line of lines) {
 		result += countCardPoints(line);
 	}
-	console.log('part1 output:',result);
+	console.log("part1 output:", result);
 }
 
 /***
@@ -45,3 +46,35 @@ export function day4part1() {
     .trim()
     .split('\n');
  * * */
+
+let cardInstances: number[] = [];
+function countCardInstances(line: string, cardNumber: number) {
+	const lists = line.split(":")[1].trim().split("|");
+	lists;
+	const [winningNumbers, myNumbers] = lists.map(
+		(item) => item.match(/\d+/g)?.map(Number) || [],
+	);
+	const commonItems = myNumbers.filter((item) => winningNumbers.includes(item));
+	cardInstances[cardNumber] = (cardInstances[cardNumber] ?? 0) + 1;
+
+	for (let j = 0; j < cardInstances[cardNumber]; j++) {
+		if (commonItems.length === 0) {
+			continue;
+		}
+		for (let i = 1; i <= commonItems.length; i++) {
+			cardInstances[cardNumber + i] = (cardInstances[cardNumber + i] ?? 0) + 1;
+		}
+	}
+
+	return cardInstances[cardNumber];
+}
+
+export function day4part2() {
+	let count = 0;
+	lines.forEach((line, index) => {
+		count += countCardInstances(line, index);
+	});
+	console.log("part2 output:", count);
+}
+
+// still i dont understand part2 logic. I got the solution from online and added here for completion sake. But need to understand it better.

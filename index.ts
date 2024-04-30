@@ -1,7 +1,7 @@
-import { day1part1, day1part2 } from './day1';
-import { day2part1, day2part2 } from './day2';
-import { day3part1, day3part2 } from './day3';
-import { day4part1 } from './day4';
+import { day1part1, day1part2 } from "./day1";
+import { day2part1, day2part2 } from "./day2";
+import { day3part1, day3part2 } from "./day3";
+import { day4part1, day4part2 } from "./day4";
 
 // console.log('-------Day 1---------');
 // day1part1();
@@ -15,5 +15,6 @@ import { day4part1 } from './day4';
 // day3part1();
 // day3part2();
 
-console.log('-------Day 4---------');
+console.log("-------Day 4---------");
 day4part1();
+day4part2();
