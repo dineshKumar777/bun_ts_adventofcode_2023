@@ -48,7 +48,7 @@ export function day4part1() {
  * * */
 
 function countCardInstances(line: string, cardNumber: number) {
-	let cardInstances: number[] = [];
+	const cardInstances: number[] = [];
 	const lists = line.split(":")[1].trim().split("|");
 	lists;
 	const [winningNumbers, myNumbers] = lists.map(
