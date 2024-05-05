@@ -45,13 +45,9 @@ const day5ActualInput = await Bun.file("./inputs/day5.txt").text();
 export function day5part1() {
 	const [seedrow, ...paths] = day5ActualInput.split("\n\n");
 	let seeds = seedrow.split(": ")[1].split(" ").map(Number);
-	seeds;
-	paths;
 
 	for (const path of paths) {
 		const [name, ...ranges] = path.split("\n");
-		name;
-		ranges;
 		const newSeeds = [...seeds];
 		for (const range of ranges) {
 			const [dest, src, len] = range.split(" ").map(Number);
