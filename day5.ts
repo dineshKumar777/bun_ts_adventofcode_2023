@@ -34,50 +34,34 @@ humidity-to-location map:
 56 93 4
 `.trim();
 
+/****
+ * still I dont understand the logic here. after googling found this optimized solution.
+ * Need to understand more.
+ * https://github.com/Joxter/advent-of-code/blob/master/2023/js/day05.js
+ * ***/
+
 const day5ActualInput = await Bun.file("./inputs/day5.txt").text();
 
-const lines = part1TestInput.split("\n");
-
-const convertSeed = (seed: number, maps: Map[]): number => {
-	let current = seed;
-
-	for (const map of maps) {
-		const range = map[current];
-		if (range) {
-			current = range[0];
-		} else {
-			current = current;
-		}
-	}
-	return current;
-};
-
 export function day5part1() {
-	const seedNumbers = lines[0].split(": ")[1].split(" ").map(Number);
+	const [seedrow, ...paths] = day5ActualInput.split("\n\n");
+	let seeds = seedrow.split(": ")[1].split(" ").map(Number);
+	seeds;
+	paths;
 
-	const maps: Map<number, number[]>[] = [];
-	let currentMap: Map = {};
-
-	for (let i = 1; i < lines.length; i++) {
-		const line = lines[i];
-
-		if (line.includes("map:")) {
-			if (Object.keys(currentMap).length > 0) {
-				maps.push(currentMap);
-			}
-			currentMap = {};
-		} else {
-			const [dest, src, length] = line.split(" ").map(Number);
-			for (let j = 0; j < length; j++) {
-				currentMap[src + j] = [dest + j];
-				console.log(`${src}+${j} = ${dest}+${j}`);
-			}
+	for (const path of paths) {
+		const [name, ...ranges] = path.split("\n");
+		name;
+		ranges;
+		const newSeeds = [...seeds];
+		for (const range of ranges) {
+			const [dest, src, len] = range.split(" ").map(Number);
+			seeds.forEach((seed, index) => {
+				if (seed >= src && seed < src + len) {
+					newSeeds[index] = dest + (seed - src);
+				}
+			});
 		}
+		seeds = newSeeds;
 	}
-
-	maps.push(currentMap);
-	console.log(maps);
-	const locations = seedNumbers.map((seed) => convertSeed(seed, maps));
-	console.log(locations);
-	console.log("part1 output:", Math.min(...locations));
+	console.log(Math.min(...seeds));
 }

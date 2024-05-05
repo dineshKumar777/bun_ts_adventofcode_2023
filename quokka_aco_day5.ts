@@ -35,45 +35,30 @@ humidity-to-location map:
 56 93 4
 `.trim();
 
-const lines = input.split("\n");
-lines;
-const seedNumbers = lines[0].split(": ")[1].split(" ").map(Number);
-seedNumbers;
+const [seedrow, ...paths] = input.split("\n\n");
+let seeds = seedrow.split(": ")[1].split(" ").map(Number);
+seeds;
+paths;
 
-const maps: Map<number, number[]>[] = [];
-let currentMap: Map = {};
+for (const path of paths) {
+	const [name, ...ranges] = path.split("\n");
+	name;
+	ranges;
+	const newSeeds = [...seeds];
+	newSeeds;
+	for (const range of ranges) {
+		range;
+		const [dest, src, len] = range.split(" ").map(Number);
 
-for (let i = 1; i < lines.length; i++) {
-	const line = lines[i];
-
-	if (line.includes("map:")) {
-		if (Object.keys(currentMap).length > 0) {
-			maps.push(currentMap);
-		}
-		currentMap = {};
-	} else {
-		const [dest, src, length] = line.split(" ").map(Number);
-		for (let j = 0; j < length; j++) {
-			currentMap[src + j] = [dest + j];
-			console.log(`${src}+${j} = ${dest}+${j}`);
-		}
+		seeds.forEach((seed, index) => {
+			console.log(`${seed} >= ${src} = ${dest} < (${seed} - ${src})`);
+			if (seed >= src && seed < src + len) {
+				newSeeds[index] = dest + (seed - src);
+				console.log(`${newSeeds[index]} = ${dest} + ${seed} - ${src}`);
+			}
+		});
 	}
+	seeds = newSeeds;
 }
 
-const convertSeed = (seed: number, maps: Map[]): number => {
-	let current = seed;
-
-	for (const map of maps) {
-		const range = map[current];
-		if (range) {
-			current = range[0];
-		} else {
-			current = current;
-		}
-	}
-	return current;
-};
-
-maps.push(currentMap);
-const locations = seedNumbers.map((seed) => convertSeed(seed, maps));
-console.log(Math.min(...locations));
+console.log(Math.min(...seeds));
