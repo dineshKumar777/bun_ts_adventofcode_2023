@@ -3,7 +3,7 @@ import { day2part1, day2part2 } from "./day2";
 import { day3part1, day3part2 } from "./day3";
 import { day4part1, day4part2 } from "./day4";
 import { day5part1 } from "./day5";
-import { day6part1 } from "./day6.ts";
+import { day6part1, day6part2 } from "./day6.ts";
 import testfunction from "./test.ts";
 
 // console.log('-------Day 1---------');
@@ -26,4 +26,6 @@ import testfunction from "./test.ts";
 // day5part1();
 
 console.log("-------Day 6---------");
-day6part1();
+// day6part1();
+day6part2();
+// testfunction();
