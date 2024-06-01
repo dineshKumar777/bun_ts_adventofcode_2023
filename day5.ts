@@ -43,21 +43,24 @@ humidity-to-location map:
 const day5ActualInput = await Bun.file("./inputs/day5.txt").text();
 
 export function day5part1() {
-	const [seedrow, ...paths] = day5ActualInput.split("\n\n");
-	let seeds = seedrow.split(": ")[1].split(" ").map(Number);
+  const [seedrow, ...paths] = day5ActualInput.split("\n\n");
+  let seeds = seedrow.split(": ")[1].split(" ").map(Number);
 
-	for (const path of paths) {
-		const [name, ...ranges] = path.split("\n");
-		const newSeeds = [...seeds];
-		for (const range of ranges) {
-			const [dest, src, len] = range.split(" ").map(Number);
-			seeds.forEach((seed, index) => {
-				if (seed >= src && seed < src + len) {
-					newSeeds[index] = dest + (seed - src);
-				}
-			});
-		}
-		seeds = newSeeds;
-	}
-	console.log(Math.min(...seeds));
+  for (const path of paths) {
+    const [name, ...ranges] = path.split("\n");
+    const newSeeds = [...seeds];
+    for (const range of ranges) {
+      const [dest, src, len] = range.split(" ").map(Number);
+      seeds.forEach((seed, index) => {
+        if (seed >= src && seed < src + len) {
+          newSeeds[index] = dest + (seed - src);
+        }
+      });
+    }
+    seeds = newSeeds;
+  }
+  console.log(Math.min(...seeds));
 }
+
+// Part 2 is tough for me to understand at the moment
+// for now I will skip this.
